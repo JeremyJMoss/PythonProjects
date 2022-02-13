@@ -20,12 +20,18 @@ class Deck:
     def count(self):
         return len(self.cards)
 
+    def __len__(self):
+        return len(self.cards)
+
     def __repr__(self):
         return "Deck of {a} cards".format(a=self.count())
 
+    def __iter__(self):
+        return iter(self.cards)
+
     def _deal(self, num):
         count = self.count()
-        actual = min([count,num])
+        actual = min([count, num])
         if count == 0:
             raise ValueError("All cards have been dealt")
         cards = self.cards[-actual:]
@@ -43,3 +49,9 @@ class Deck:
 
     def deal_hand(self, hand_size):
         return self._deal(hand_size)
+
+
+my_deck = Deck()
+my_deck.shuffle()
+for card in my_deck:
+    print(card)
